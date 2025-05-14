@@ -10,18 +10,20 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-     return view ('employee.index');
+        // $employees = Employee::where('id', '=', 1)->get();
+        $employees = Employee::all();
+        return view('employee.index', compact('employees'));
     }
 
     public function create()
     {
-        return view ('employee.create');
+        return view('employee.create');
     }
 
     public function store(Request $request)
     {
         // Validate and store the employee data
-      $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email',
             'address' => 'required|string|max:255',
@@ -51,6 +53,36 @@ class EmployeeController extends Controller
         $data = $request->all();
         Employee::create($data);
         return redirect()->route('employee.index')->with('success', 'Employee created successfully.');
+    }
+
+    public function edit($id)
+    {
+        $employee = Employee::find($id);
+        return view('employee.edit', compact('employee'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validate and update the employee data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:employees,email,' . $id,
+            'address' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+        ]);
+
+        $employee = Employee::find($id);
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'address' => $request->input('address'),
+            'position' => $request->input('position'),
+            'phone' => $request->input('phone'),
+            'salary' => $request->input('salary'),
+        ];
+
+        $employee->update($data );
+        return redirect()->route('employee.index')->with('success', 'Employee updated successfully.');
     }
 
 }

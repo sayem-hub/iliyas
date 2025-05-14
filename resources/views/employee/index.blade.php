@@ -25,37 +25,40 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th>SL</th>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Salary</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
+
+                    @foreach($employees as $employee)
+
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Ilyas</td>
-                        <td>Ali</td>
-                        <td>@IlyasAli</td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $employee->name }}</td>
+                        <td>{{ $employee->position }}</td>
+                        <td>{{ $employee->salary }}</td>
+                        <td>{{ $employee->email }}</td>
+                        <td>{{ $employee->phone }}</td>
+                        <td>{{ $employee->address }}</td>
+                        <td>
+                            <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-warning">Edit</a>
+
+                        </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>@JohnDoe</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Jane</td>
-                        <td>Smith</td>
-                        <td>@JaneSmith</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Bob</td>
-                        <td>Johnson</td>
-                        <td>@BobJohnson</td>
-                    </tr>
+                    @endforeach
+
+                    @if($employees->isEmpty())
+                        <tr>
+                            <td colspan="8" class="text-center">No employees found</td>
+                        </tr>
+                    @endif
 
                 </tbody>
             </table>

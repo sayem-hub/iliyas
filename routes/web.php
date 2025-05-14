@@ -12,3 +12,5 @@ Route::get('/', function () { return view('welcome'); })->name('home');
 Route::get('/employee-index', [EmployeeController::class, 'index'])->name('employee.index');
 Route::get('/employee-create', [EmployeeController::class, 'create'])->name('employee.create');
 Route::post('/employee-store', [EmployeeController::class, 'store'])->name('employee.store');
+Route::get('/employee-edit/{id}', [EmployeeController::class, 'edit'])->name('employee.edit');
+Route::post('/employee-update/{id}', [EmployeeController::class, 'update'])->name('employee.update');
