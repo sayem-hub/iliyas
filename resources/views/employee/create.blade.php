@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
-        <title>Create</title>
-
-    </head>
-
-    <body>
-
+@extends('layouts.app')
+@section('content')
         <div class="container">
-            <h1>Create Page</h1>
+            <h3 class="text-center">Create Page</h3>
 
             <form action="{{ route('employee.store') }}" method="POST">
                 @csrf
@@ -52,9 +40,4 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <a href="{{ route('employee.index') }}" class="btn btn-secondary mt-3">Back to Employee List</a>
-
-
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-
-</html>
+@endsection
