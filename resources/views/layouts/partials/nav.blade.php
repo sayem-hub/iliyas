@@ -16,6 +16,16 @@
                 <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">About</a></li>
             </ul>
+            <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Auth Button
+                </a>
+
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                  <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                </ul>
+              </div>
         </header>
     </div>
 </nav>
