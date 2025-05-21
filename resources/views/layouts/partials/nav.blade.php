@@ -1,5 +1,3 @@
-
-
 <nav>
     <h1 class="visually-hidden">Employee Management</h1>
     <div class="container">
@@ -17,15 +15,20 @@
                 <li class="nav-item"><a href="#" class="nav-link">About</a></li>
             </ul>
             <div class="dropdown">
-                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Auth Button
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Auth Button
                 </a>
 
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
-                  <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                    @if (!Auth::check())
+                        <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                        <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                    @else
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                    @endif
                 </ul>
-              </div>
+            </div>
         </header>
     </div>
 </nav>

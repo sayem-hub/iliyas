@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -52,12 +54,19 @@ class AuthController extends Controller
             'password' => 'required|min:6'
         ]);
         $credentials = $request->only('email', 'password');
-        if (auth()->attempt($credentials)) {
+        // if (auth()->attempt($credentials))
+
+        if (Auth::attempt($credentials))
+        {
             return redirect()->intended(route('home'))
                 ->with('success', 'Welcome '.auth()->user()->name.'! Login successful!');
         }
         return back()->with('error', 'Invalid credentials');
     }
 
-
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login')->with('success', 'Logout successful!');
+    }
 }
