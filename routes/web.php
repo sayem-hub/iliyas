@@ -23,6 +23,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/employee-edit/{id}', [EmployeeController::class, 'edit'])->name('employee.edit');
     Route::post('/employee-update/{id}', [EmployeeController::class, 'update'])->name('employee.update');
     Route::get('/employee-delete/{id}', [EmployeeController::class, 'delete'])->name('employee.delete');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
