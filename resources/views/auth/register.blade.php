@@ -7,7 +7,6 @@
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
-
                 @endif
                 <div class="card-header">{{ __('Register') }}</div>
 
@@ -16,8 +15,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name"
-                                class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text"
@@ -50,13 +48,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password"
-                                class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password"
-                                    required autocomplete="new-password">
+                                    class="form-control @error('password') is-invalid @enderror" name="password" required
+                                    autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -65,6 +62,19 @@
                                 @enderror
                             </div>
 
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="role" class="col-md-4 col-form-label text-md-end">Role</label>
+                                <select class="form-select" name="role" id="role">
+                                    <option selected>Select Your Role</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                    <option value="editor">Editor</option>
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
