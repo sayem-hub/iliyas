@@ -28,6 +28,24 @@
                         <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                     @endif
                 </ul>
+
+            </div>
+
+            <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                   Library
+                </a>
+
+                <ul class="dropdown-menu">
+
+                        <li><a class="dropdown-item" href="{{ route('designation.index') }}">Designation</li>
+                        <li><a class="dropdown-item" href="{{ route('department.index') }}">Department</a></li>
+
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+
+                </ul>
+
             </div>
         </header>
     </div>

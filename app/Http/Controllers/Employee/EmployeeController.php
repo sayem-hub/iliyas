@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Employee;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Designation;
 
 class EmployeeController extends Controller
 {
@@ -17,7 +19,9 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        return view('employee.create');
+        $designations = Designation::all();
+        $departments = Department::all();
+        return view('employee.create', compact('designations', 'departments'));
     }
 
     public function store(Request $request)
@@ -27,30 +31,21 @@ class EmployeeController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email',
             'address' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
+            'designation_id' => 'required|exists:designations,id',
+            'department_id' => 'nullable|exists:departments,id',
         ]);
-        // Assuming you have an Employee model
-        // $employee = new Employee();
 
-        // $employee->name = $request->input('name');
-        // $employee->email = $request->input('email');
-        // $employee->phone = $request->input('phone');
-        // $employee->position = $request->input('position');
-        // $employee->salary = $request->input('salary');
-        // $employee->save();
-        // Or use mass assignment if you have the fillable properties set
-        // Employee::create($request->only('name', 'email', 'position'));
-        // Redirect or return a response
 
-        // $data = [
-        //     'name' => $request->input('name'),
-        //     'email' => $request->input('email'),
-        //     'phone' => $request->input('phone'),
-        //     'salary' => $request->input('salary'),
-        //     'address' => $request->input('address'),
-        //     'position' => $request->input('position'),
-        // ];
-        $data = $request->all();
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'salary' => $request->input('salary'),
+            'address' => $request->input('address'),
+            'designation_id' => $request->input('designation_id'),
+            'department_id' => $request->input('department_id', null),
+        ];
+
         Employee::create($data);
         return redirect()->route('employee.index')->with('success', 'Employee created successfully.');
     }

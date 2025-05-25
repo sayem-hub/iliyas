@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('department_id')->constrained('departments')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreignId('designation_id')->constrained('designations')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreignId('department_id')->nullable()->constrained('departments')->onDelete('restrict')->onUpdate('cascade');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('position')->nullable();
+            // $table->string('designation')->nullable();
             $table->decimal('salary', total: 8, places: 2 )->nullable();
             $table->timestamps();
         });

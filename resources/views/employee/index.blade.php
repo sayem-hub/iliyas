@@ -16,6 +16,7 @@
                     <th>SL</th>
                     <th>Name</th>
                     <th>Designation</th>
+                    <th>Department</th>
                     <th>Salary</th>
                     <th>Email</th>
                     <th>Phone</th>
@@ -29,7 +30,8 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $employee->name }}</td>
-                        <td>{{ $employee->position }}</td>
+                        <td>{{ $employee->designation->name }}</td>
+                        <td>{{ $employee->department->name }}</td>
                         <td>{{ $employee->salary }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone }}</td>
