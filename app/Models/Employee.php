@@ -14,6 +14,8 @@ class Employee extends Model
         'address',
         'designation_id',
         'department_id',
+        'inserted_by',
+        'updated_by',
     ];
 
     public function department()
@@ -24,5 +26,14 @@ class Employee extends Model
     public function designation()
     {
         return $this->belongsTo(Designation::class);
+    }
+
+    public function insertedBy()
+    {
+        return $this->belongsTo(User::class, 'inserted_by');
+    }
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

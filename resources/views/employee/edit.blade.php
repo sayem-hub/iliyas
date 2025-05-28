@@ -25,6 +25,33 @@
 
                     @enderror
                 </div>
+                {{-- {{ dd($employee->desgination->name) }} --}}
+                <div class="mb-3">
+                    <label for="desgination_id" class="form-label">Desgination</label>
+                   <select class="form-select" id="desgination_id" name="designation_id">
+                    <option value="" selected>Select Designation</option>
+                        @foreach ($designations as $designation)
+                            <option value="{{ $designation->id }}" {{ $employee->designation_id == $designation->id ? 'selected' : '' }}>{{$designation->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('designation_id')
+                        <div class="alert alert-danger">{{ $message }}</div>
+
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="department_id" class="form-label">Department</label>
+                    <select class="form-select" id="department_id" name="department_id">
+                        <option value="" selected>Select Department</option>
+                        @foreach ($departments as $department)
+                            <option value="{{ $department->id }}" {{ $employee->department_id == $department->id ? 'selected' : '' }}>{{$department->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('department_id')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{ $employee->email }}" >
@@ -41,10 +68,7 @@
                     <label for="address" class="form-label">Address</label>
                     <input type="text" class="form-control" id="address" name="address" value="{{ $employee->address }}">
                 </div>
-                <div class="mb-3">
-                    <label for="position" class="form-label">Position</label>
-                    <input type="text" class="form-control" id="position" name="position" value="{{ $employee->position }}" >
-                </div>
+
                 <div class="mb-3">
                     <label for="salary" class="form-label">Salary</label>
                     <input type="number" class="form-control" id="salary" name="salary" value="{{ $employee->salary }}" >

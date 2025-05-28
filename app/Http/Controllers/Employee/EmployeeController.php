@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Models\Employee;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\Designation;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -44,6 +45,8 @@ class EmployeeController extends Controller
             'address' => $request->input('address'),
             'designation_id' => $request->input('designation_id'),
             'department_id' => $request->input('department_id', null),
+            'inserted_by' => Auth::id(), //Auth::id(),
+
         ];
 
         Employee::create($data);
@@ -52,8 +55,11 @@ class EmployeeController extends Controller
 
     public function edit($id)
     {
+        // Find the employee by ID and pass it to the edit view
+        $designations = Designation::all();
+        $departments = Department::all();
         $employee = Employee::find($id);
-        return view('employee.edit', compact('employee'));
+        return view('employee.edit', compact('employee', 'designations', 'departments'));
     }
 
     public function update(Request $request, $id)
@@ -63,18 +69,25 @@ class EmployeeController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email,' . $id,
             'address' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
+            'department_id' => 'required|exists:departments,id',
+            'designation_id' => 'required|exists:designations,id',
         ]);
 
         $employee = Employee::find($id);
+
+
         $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'address' => $request->input('address'),
-            'position' => $request->input('position'),
+            'designation_id' => $request->input('designation_id'),
             'phone' => $request->input('phone'),
             'salary' => $request->input('salary'),
+            'department_id' => $request->input('department_id'),
+            'updated_by' => Auth::id(), //Auth::id(),
         ];
+
+
 
         $employee->update($data );
         return redirect()->route('employee.index')->with('success', 'Employee updated successfully.');

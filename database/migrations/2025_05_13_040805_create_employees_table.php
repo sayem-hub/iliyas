@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('address')->nullable();
             // $table->string('designation')->nullable();
             $table->decimal('salary', total: 8, places: 2 )->nullable();
+
+            $table->foreignId('inserted_by')->nullable()->constrained('users')->onDelete('set null')->onUpdate('cascade');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('set null')->onUpdate('cascade');
             $table->timestamps();
         });
     }
