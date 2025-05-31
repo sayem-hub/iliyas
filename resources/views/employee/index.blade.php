@@ -39,7 +39,9 @@
                         <td>{{ $employee->phone }}</td>
                         <td>{{ $employee->address }}</td>
                         <td>{{ $employee->insertedBy->name }}</td>
-                        <td>{{ $employee->updatedBy->name }}</td>
+                        <td>
+                            {{$employee->updatedBy ? $employee->updatedBy->name : 'N/A'}}
+                        </td>
                         <td>
                             <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-warning">Edit</a>
                             <a href="{{ route('employee.delete', $employee->id) }}" class="btn btn-danger">Delete</a>
