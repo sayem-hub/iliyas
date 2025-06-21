@@ -16,6 +16,7 @@ class Employee extends Model
         'department_id',
         'inserted_by',
         'updated_by',
+        'employee_image',
     ];
 
     public function department()

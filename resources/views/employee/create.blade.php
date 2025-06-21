@@ -3,7 +3,7 @@
         <div class="container">
             <h3 class="text-center">Create Page</h3>
 
-            <form action="{{ route('employee.store') }}" method="POST">
+            <form action="{{ route('employee.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Full Name</label>
@@ -61,6 +61,11 @@
                 <div class="mb-3">
                     <label for="salary" class="form-label">Salary</label>
                     <input type="number" class="form-control" id="salary" name="salary" >
+                </div>
+
+                   <div class="mb-3">
+                    <label for="employee_image" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="employee_image" name="employee_image" >
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

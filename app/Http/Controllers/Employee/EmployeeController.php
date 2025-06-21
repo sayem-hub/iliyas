@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
+
+
     public function index()
     {
         // $employees = Employee::where('id', '=', 1)->get();
-        $employees = Employee::all();
+        $employees = Employee::paginate(10);
         return view('employee.index', compact('employees'));
     }
 
@@ -37,6 +39,16 @@ class EmployeeController extends Controller
         ]);
 
 
+
+    if ($request->hasFile('employee_image')) {
+        $file = $request->file('employee_image');
+        $ext = $file->getClientOriginalExtension();
+        // Create unique file name with date, time, and unique id
+        $uniqueName = 'img_' . now()->format('Ymd_His') . '_' . uniqid() . '.' . $ext;
+        // Store in 'public/uploads' directory
+        $file->move('images/employees', $uniqueName);
+
+    }
         $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -45,6 +57,7 @@ class EmployeeController extends Controller
             'address' => $request->input('address'),
             'designation_id' => $request->input('designation_id'),
             'department_id' => $request->input('department_id', null),
+            'employee_image' => $uniqueName,
             'inserted_by' => Auth::id(), //Auth::id(),
 
         ];

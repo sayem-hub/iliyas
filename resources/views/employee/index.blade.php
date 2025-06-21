@@ -15,6 +15,7 @@
                 <tr>
                     <th>SL</th>
                     <th>Name</th>
+                    <th>Image</th>
                     <th>Designation</th>
                     <th>Department</th>
                     <th>Salary</th>
@@ -32,6 +33,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $employee->name }}</td>
+                        <td><img src="{{ asset('images/employees/'.$employee->employee_image) }}" alt="Image" width="100" height="100"></td>
                         <td>{{ $employee->designation->name }}</td>
                         <td>{{ $employee->department->name }}</td>
                         <td>{{ $employee->salary }}</td>
@@ -58,5 +60,8 @@
 
             </tbody>
         </table>
+        <div class="d-flex justify-content-end">
+            {{ $employees->links() }}
+        </div>
     </div>
 @endsection
