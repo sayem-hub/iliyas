@@ -37,4 +37,9 @@ class Employee extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function itComponents()
+    {
+        return $this->hasMany(ItComponent::class);
+    }
 }
